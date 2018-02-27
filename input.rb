@@ -86,9 +86,6 @@ def userInput(width, blockBackspace, blockDelete, blockArrows, blockOption, bloc
 			if !blockReturn
 				break
 			end
-		# => 01234
-		# => a bcd
-		# => 12345
 		# when "\eb"										# ⌥←
 		# 	if cursor > 1
 		# 		if input[cursor-2] == ' '
@@ -109,8 +106,8 @@ def userInput(width, blockBackspace, blockDelete, blockArrows, blockOption, bloc
 			end
 		end
 
-		print "\e[2K"									# Clears input
-		print "\e[G"									# Sets cursor to the beginning of the line
+		print "\e[2K"
+		print "\e[G"
 		print "#{input}"
 
 		if cursor == width+1
@@ -118,9 +115,7 @@ def userInput(width, blockBackspace, blockDelete, blockArrows, blockOption, bloc
 		else
 			print "\e[?25h"
 		end
-		#if cursor 
 		print "\e[#{cursor}G"
-		#print "\e[?25l"
 		
 	end
 	print "\e[G"
