@@ -72,7 +72,7 @@ optparse = OptionParser.new do|opts|
 	opts.on( '--about', 'Show about message' ) do
 		puts "TypeSkill #{Version}"
 		puts "Grind experience in typing skill line!"
-		puts "https://github.com/MOPO3OB"
+		puts "https://github.com/MOPO3OB/TypeSkill"
 		exit 0
 	end
 
