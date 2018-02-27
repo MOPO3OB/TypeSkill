@@ -5,17 +5,7 @@ require_relative 'parser'
 require_relative 'output'
 require_relative 'input'
 
-def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, blockReturn)
-	# puts "File: #{file}"
-	# puts "Colored output: #{colored}"
-	# puts "Blocking backspace: #{blockBackspace}"
-	# puts "Blocking delete: #{blockDelete}"
-	# puts "Blocking arrows: #{blockArrows}"
-	# puts "Blocking option: #{blockOption}"
-	# puts "Blocking return: #{blockReturn}"
-	# puts "ᖇꤕType".blackBold			#1580 A915
-
-	
+def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, blockReturn)	
 	checkFile(file)
 	height, width = IO.console.winsize
 	lines, wordsTotal = parse file, width
