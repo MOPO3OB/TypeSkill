@@ -1,12 +1,12 @@
 def checkFile(file)
 	if !File.exist?(file)
-		error "file \"#{file}\" does not exist", 3
+		error 4, file
 	elsif !File.file?(file)
-		error "\"#{file}\" is not a file", 4
+		error 5, file
 	elsif !File.readable?(file)
-		error "file \"#{file}\" is not readable", 5
+		error 6, file
 	elsif File.zero?(file)
-		error "file \"#{file}\" is empty", 6
+		error 7, file
 	else
 		return true
 	end

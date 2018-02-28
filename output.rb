@@ -27,7 +27,7 @@ def giveLine(line, width, colored)
 end
 
 def statusBar(width, previous, percentageCompleted, colored)
-	separator = '‒'								#2012
+	separator = @strings[:output][:separator]								#2012
 
 	percentage = " #{percentageCompleted}%"
 	if percentageCompleted < 10
@@ -44,11 +44,11 @@ def statusBar(width, previous, percentageCompleted, colored)
 	else
 		case previous
 		when "none"
-			smiley = ":/"
+			smiley = @strings[:output][:smileys][:indifferent]
 		when "good"
-			smiley = ":)"
+			smiley = @strings[:output][:smileys][:happy]
 		when "bad"
-			smiley = ":("
+			smiley = @strings[:output][:smileys][:sad]
 		end
 		puts separator*2+" #{smiley} "+separator*(width-13)+"#{percentage} "+separator*2
 	end
@@ -65,10 +65,10 @@ def showResults(correct, completed, total, time, wordsTotal, colored)
 	if minutes >= 1
 		time = "#{minutes.to_i}:#{time}"
 	end
-	results = "#{correct}/#{completed} in #{time}"
+	results = "#{correct}/#{completed} #{@strings[:output][:inTime]} #{time}"
 	if completed == total
 		wordsPerMinute = wordsTotal/minutes
-		results = results + " | #{wordsPerMinute.to_i} WPM"
+		results = results + " | #{wordsPerMinute.to_i} #{@strings[:output][:wpm]}"
 	end
 	puts results
 end
