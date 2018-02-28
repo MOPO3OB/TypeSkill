@@ -38,9 +38,9 @@ options = {}
 optparse = OptionParser.new do|opts|
 	opts.banner = @strings[:help][:banner]
 
-	options[:colored] = false
+	options[:colored] = true
 	opts.on( '-c', '--color', @strings[:help][:colored] ) do
-		options[:colored] = true
+		options[:colored] = false
 	end
 
 	options[:backspace] = false

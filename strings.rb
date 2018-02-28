@@ -20,7 +20,7 @@ keys = {
 	},
 	:help	=>	{
 		:banner		=>	"Usage: #{@typeskill} [options] file",
-		:colored	=>	'Use colored output',
+		:colored	=>	"Don't use colored output",
 		:backspace	=>	"Block #{keys[:backspace]} backspace (use #{keys[:control]}H instead)",
 		:delete		=>	"Block #{keys[:delete]} delete (use #{keys[:control]}D instead)",
 		:arrows		=>	"Block #{keys[:leftArrow]}/#{keys[:rightArrow]} arrows (use #{keys[:control]}B/#{keys[:control]}F instead)",
