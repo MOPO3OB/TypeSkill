@@ -1,7 +1,7 @@
 # TypeSkill
 TypeSkill is a small program written in Ruby that aims to help you get better in typing.
 
-Only tested on macOS so far. Should work on most UNIX-based systems that have Ruby 2.0.0+
+Tested on macOS and Linux. Should work on all UNIX-based systems with any Ruby version (confirmed working on 1.9.3+).
 
 [**Download here.**](https://github.com/MOPO3OB/TypeSkill/releases/tag/1.0.0)
 
