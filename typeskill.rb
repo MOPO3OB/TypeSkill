@@ -5,18 +5,6 @@ require 'rbconfig'
 @version = '1.0.0'
 @typeskill = File.basename(__FILE__)
 
-require_relative 'strings'
-
-def error(errorcode, clarification=nil)
-	print "#{@strings[:error][:head]} #{errorcode}: "
-	message = @strings[:error][:messages][errorcode-1]
-	if clarification != nil
-		message.sub! '$clarification$', clarification
-	end
-	puts "#{message}\n#{@strings[:error][:body]}"
-	exit errorcode
-end
-
 @os = (
 	host_os = RbConfig::CONFIG['host_os']
 	case host_os
@@ -32,6 +20,18 @@ end
 		error 1, host_os.inspect
 	end
 )
+
+require_relative 'strings'
+
+def error(errorcode, clarification=nil)
+	print "#{@strings[:error][:head]} #{errorcode}: "
+	message = @strings[:error][:messages][errorcode-1]
+	if clarification != nil
+		message.sub! '$clarification$', clarification
+	end
+	puts "#{message}\n#{@strings[:error][:body]}"
+	exit errorcode
+end
 
 options = {}
 

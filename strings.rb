@@ -31,16 +31,16 @@ keys = {
 		:about		=>	'Show about message',
 		:changelog	=>	'Show changelog'
 	},
-	:shortcuts		=>	"\u2303C		Interrupt program execution\n"\
-						"\u2303A		Go to the beginning of line\n"\
-						"\u2303E		Go to the end of line\n"\
-						"\u2303T		Swap 2 characters\n"\
-						"\u2303K		Delete text after the insertion point\n"\
-						"\u2303H or \u232B		Backspace\n"\
-						"\u2303D or \u2326		Delete\n"\
-						"\u2303F or \u2192		Go 1 character forwards\n"\
-						"\u2303B or \u2190		Go 1 character backwards\n"\
-						"\u2303J or \u23CE		Complete line",
+	:shortcuts		=>	"#{keys[:control]}C		Interrupt program execution\n"\
+						"#{keys[:control]}A		Go to the beginning of line\n"\
+						"#{keys[:control]}E		Go to the end of line\n"\
+						"#{keys[:control]}T		Swap 2 characters\n"\
+						"#{keys[:control]}K		Delete text after the insertion point\n"\
+						"#{keys[:control]}H or #{keys[:backspace]}		Backspace\n"\
+						"#{keys[:control]}D or #{keys[:delete]}		Delete\n"\
+						"#{keys[:control]}F or #{keys[:rightArrow]}		Go 1 character forwards\n"\
+						"#{keys[:control]}B or #{keys[:leftArrow]}		Go 1 character backwards\n"\
+						"#{keys[:control]}J or #{keys[:return]}		Complete line",
 	:about			=>	"TypeSkill #{@version}\n"\
 						"Grind experience in typing skill line!\n"\
 						"https://github.com/MOPO3OB/TypeSkill",
