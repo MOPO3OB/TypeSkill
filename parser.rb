@@ -1,6 +1,6 @@
 def parse(file, width)
 	lines = []
-	wordsTotal = 0
+	wordsOnLine = []
 	File.readlines(file).each do |line|
 		str = "#{line}".delete "\n"
 		
@@ -11,7 +11,7 @@ def parse(file, width)
 			end
 		end
 		wordsNumber = words.length
-		wordsTotal = wordsTotal + wordsNumber
+		wordsOnLine.push(wordsNumber)
 		wordsPrinted = 0
 		while wordsPrinted < wordsNumber do
 			symbolsOnLine = 0
@@ -33,5 +33,5 @@ def parse(file, width)
 			lines.push(printedLine)
 		end
 	end
-	return lines, wordsTotal
+	return lines, wordsOnLine
 end

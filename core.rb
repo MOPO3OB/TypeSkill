@@ -8,10 +8,11 @@ require_relative 'input'
 def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, blockReturn)	
 	checkFile(file)
 	height, width = IO.console.winsize
-	lines, wordsTotal = parse file, width
+	lines, wordsOnLine = parse file, width
 	total = lines.length
 	correct = 0
 	completed = 0
+	wordsCompleted = 0
 	previous = 'none'
 	timeStarted = Time.now.getutc
 	
@@ -34,6 +35,8 @@ def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, b
 			else
 				previous = "bad"
 			end
+			
+			wordsCompleted = wordsCompleted + wordsOnLine[index]
 			
 			if completed == total
 				print "\e[2A\e[2K\e[B\e[2K\e[A"
@@ -65,6 +68,6 @@ def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, b
 		end
 	end
 	time = Time.now.getutc - timeStarted
-	showResults correct, completed, total, time, wordsTotal, colored
+	showResults correct, completed, total, time, wordsCompleted, colored
 	exit 0
 end

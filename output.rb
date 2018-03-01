@@ -27,7 +27,7 @@ def giveLine(line, width, colored)
 end
 
 def statusBar(width, previous, percentageCompleted, colored)
-	separator = @strings[:output][:separator]								#2012
+	separator = @strings[:output][:separator]
 
 	percentage = " #{percentageCompleted}%"
 	if percentageCompleted < 10
@@ -54,7 +54,7 @@ def statusBar(width, previous, percentageCompleted, colored)
 	end
 end
 
-def showResults(correct, completed, total, time, wordsTotal, colored)
+def showResults(correct, completed, total, time, wordsCompleted, colored)
 	print "\e[A"
 	if completed < total
 		completed = "#{completed}(#{total})"
@@ -66,9 +66,7 @@ def showResults(correct, completed, total, time, wordsTotal, colored)
 		time = "#{minutes.to_i}:#{time}"
 	end
 	results = "#{correct}/#{completed} #{@strings[:output][:inTime]} #{time}"
-	if completed == total
-		wordsPerMinute = wordsTotal/minutes
-		results = results + " | #{wordsPerMinute.to_i} #{@strings[:output][:wpm]}"
-	end
+	wordsPerMinute = wordsCompleted/minutes
+	results = results + " | #{wordsPerMinute.to_i} #{@strings[:output][:wpm]}"
 	puts results
 end
