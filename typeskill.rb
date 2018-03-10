@@ -5,10 +5,50 @@ require 'rbconfig'
 @version = '1.0.0'
 @typeskill = File.basename(__FILE__)
 
+begin
+	verbose = $VERBOSE
+	$VERBOSE = nil
+	require_relative 'strings'	# To avoid refinements are experimental in Ruby 2.0.0
+ensure
+	$VERBOSE = verbose
+end
+
+loadStrings(:error)
+
+def error(errorcode, clarification=nil)
+	print "#{@strings[:error][:head]} #{errorcode}: "
+	message = @strings[:error][:messages][errorcode-1]
+	if clarification != nil
+		message.sub! '$clarification$', clarification
+	end
+	print "#{message}\n#{@strings[:error][:body]}"
+	puts if @os != :windows
+	exit errorcode
+end
+
 @os = (
+	@console = false
 	host_os = RbConfig::CONFIG['host_os']
 	case host_os
 	when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+		@console = STDOUT.isatty
+		ver = (/(\d|\s)\d\.\d[^\d]/).match(`ver`)
+		@windowsVersion = case ver[0].to_f
+		when 4.0
+			95
+		when 5.1, 5.2
+			'XP'
+		when 6.0
+			'Vista'
+		when 6.1
+			7
+		when 6.2
+			8
+		when 6.3
+			8.1
+		when 10.0
+			10
+		end if ver != nil
 		:windows
 	when /darwin|mac os/
 		:macos
@@ -21,17 +61,7 @@ require 'rbconfig'
 	end
 )
 
-require_relative 'strings'
-
-def error(errorcode, clarification=nil)
-	print "#{@strings[:error][:head]} #{errorcode}: "
-	message = @strings[:error][:messages][errorcode-1]
-	if clarification != nil
-		message.sub! '$clarification$', clarification
-	end
-	puts "#{message}\n#{@strings[:error][:body]}"
-	exit errorcode
-end
+loadStrings(:*)
 
 options = {}
 

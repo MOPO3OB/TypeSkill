@@ -7,7 +7,20 @@ require_relative 'input'
 
 def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, blockReturn)	
 	checkFile(file)
-	height, width = IO.console.winsize
+
+	case @os
+	when :macos, :linux
+		width = IO.console.winsize[1]
+	when :windows
+		if @console
+			width = `mode`.split(':')[-4].scan(/\d/).join.to_i
+		else
+			width = `stty size`.split(' ')[1].to_i
+		end
+	end
+		
+	width -= 1 if @console
+
 	lines, wordsOnLine = parse file, width
 	total = lines.length
 	correct = 0
@@ -50,6 +63,7 @@ def core(file, colored, blockBackspace, blockDelete, blockArrows, blockOption, b
 					print line
 				end
 				print "\e[2B\e[2K\e[G"
+				print "\e[D" if @console			# Fix for console
 			else
 				print "\e[2A\e[2K\e[B\e[2K\e[2A"
 				if colored

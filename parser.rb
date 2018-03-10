@@ -2,6 +2,7 @@ def parse(file, width)
 	lines = []
 	wordsOnLine = []
 	File.readlines(file).each do |line|
+		line.force_encoding('UTF-8')
 		str = "#{line}".delete "\n"
 		
 		words = "#{line}".split(' ')

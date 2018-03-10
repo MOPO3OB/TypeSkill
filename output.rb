@@ -19,6 +19,7 @@ end
 
 def giveLine(line, width, colored)
 	print "\e[2K"
+	print "\e[2K\e[G" if @console && [8, 8.1].include?(@windowsVersion)	# Fix for Windows 8 console
 	if colored
 		puts line.blue
 	else
@@ -68,5 +69,6 @@ def showResults(correct, completed, total, time, wordsCompleted, colored)
 	results = "#{correct}/#{completed} #{@strings[:output][:inTime]} #{time}"
 	wordsPerMinute = wordsCompleted/minutes
 	results = results + " | #{wordsPerMinute.to_i} #{@strings[:output][:wpm]}"
-	puts results
+	print results
+	puts if @os != :windows
 end
