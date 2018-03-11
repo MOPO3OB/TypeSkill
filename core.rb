@@ -1,6 +1,5 @@
 require 'io/console'
 
-require_relative 'check'
 require_relative 'parser'
 require_relative 'output'
 require_relative 'input'

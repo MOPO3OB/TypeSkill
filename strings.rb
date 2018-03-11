@@ -1,59 +1,3 @@
-module HashRecursive
-	refine Hash do
-		def merge(other_hash, recursive=false, &block)
-			if recursive
-				block_actual = Proc.new { |key, oldval, newval|
-					newval = block.call(key, oldval, newval) if block_given?
-					[oldval, newval].all? { |v| v.is_a?(Hash) } ? oldval.merge(newval, &block_actual) : newval
-				}
-				self.merge(other_hash, &block_actual)
-			else
-				super(other_hash, &block)
-			end
-		end
-		def merge!(other_hash, recursive=false, &block)
-			if recursive
-				self.replace(self.merge(other_hash, recursive, &block))
-			else
-				super(other_hash, &block)
-			end
-		end
-		def each(recursive=false, &block)
-			if recursive
-				Enumerator.new do |yielder|
-					self.map do |key, value|
-						value.each(recursive).map{ |key_next, value_next|
-							yielder << [[key, key_next].flatten, value_next]
-						} if value.is_a?(Hash)
-						yielder << [[key], value]
-					end
-				end.entries.each(&block)
-			else
-				super(&block)
-			end
-		end
-		alias_method(:each_pair, :each)
-		def dig(*keychain)
-			value = self[keychain.shift]
-			keychain.empty? ? value : value.dig(*keychain)
-		end unless method_defined?(:dig)
-		def [](keychain, recursive=false)
-			recursive && keychain.is_a?(Array) ? dig(*keychain) : super(keychain)
-		end
-		def []=(keychain, recursive=false, value)
-			if recursive && keychain.is_a?(Array)
-				key = keychain.pop
-				if keychain.empty?
-					self[key] = value
-				else
-					self[keychain, recursive] = self.dig(*keychain).merge(key => value)
-				end
-			else
-				super(keychain, value)
-			end
-		end
-	end
-end
 using HashRecursive
 
 def loadStrings(category=:*)
@@ -134,7 +78,9 @@ def loadStrings(category=:*)
 							'$clarification$ is not a file',
 							'file $clarification$ is not readable',
 							'file $clarification$ is empty',
-							'neither msvcrt nor crtdll is available'
+							'neither msvcrt nor crtdll is available',
+							'failed to determine Windows version',
+							'unknown Windows version: $clarification$'
 			]
 		},
 		:OSspecific	=> {
