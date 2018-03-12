@@ -102,7 +102,6 @@ def determineOS()
 	os = RbConfig::CONFIG['host_os']
 	@os = case os
 	when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
-		determineWindowsConsole()
 		determineWindowsVersion()
 		:windows
 	when /darwin|mac os/
@@ -114,6 +113,7 @@ def determineOS()
 	else
 		error 1, os.inspect
 	end
+	determineWindowsConsole()
 end
 
 def checkFile(file)
